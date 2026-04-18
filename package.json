@@ -7,11 +7,13 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
-    "import:wp": "node scripts/import-wordpress.mjs"
+    "import:wp": "node scripts/import-wordpress.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "11",
     "@astrojs/mdx": "^3.1.0",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "decap-server": "^3.7.0",
     "netlify-cms-proxy-server": "^1.3.24",
-    "turndown": "^7.2.0"
+    "turndown": "^7.2.0",
+    "wrangler": "^4.83.0"
   }
 }
