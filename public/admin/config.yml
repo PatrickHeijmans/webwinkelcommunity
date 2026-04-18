@@ -1,0 +1,146 @@
+backend:
+  name: github
+  repo: PatrickHeijmans/webwinkelcommunity
+  branch: main
+  base_url: https://auth.sveltia.app
+  # Alternatively, for direct GitHub OAuth (no Netlify):
+  # name: github
+  # repo: OWNER/REPO
+  # branch: main
+
+# Where uploaded images live
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+# Allow editors to preview drafts before publishing
+publish_mode: editorial_workflow
+
+# Show site in new tab from CMS header
+site_url: https://webwinkelcommunity.nl
+display_url: https://webwinkelcommunity.nl
+logo_url: /favicon.svg
+
+locale: "nl"
+
+collections:
+  # ─────────────────────────────────────────────
+  - name: "blog"
+    label: "Blog artikelen"
+    label_singular: "Artikel"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    preview_path: "blog/{{slug}}"
+    summary: "{{title}} — {{category}} · {{pubDate | date('DD-MM-YYYY')}}"
+    sortable_fields: ['pubDate', 'title', 'category']
+    view_filters:
+      - label: "Uitgelicht"
+        field: featured
+        pattern: true
+      - label: "Concepten (geen cover)"
+        field: cover
+        pattern: ""
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Samenvatting", name: "excerpt", widget: "text", required: false, hint: "Korte intro (1-2 zinnen) getoond in overzicht en social shares." }
+      - { label: "SEO description", name: "description", widget: "text", required: false }
+      - { label: "Publicatiedatum", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD HH:mm", date_format: "DD-MM-YYYY", time_format: "HH:mm" }
+      - { label: "Laatst bijgewerkt", name: "updatedDate", widget: "datetime", required: false, format: "YYYY-MM-DD HH:mm", date_format: "DD-MM-YYYY", time_format: "HH:mm" }
+      - { label: "Auteur", name: "author", widget: "string", default: "Redactie" }
+      - { label: "Auteur rol", name: "authorRole", widget: "string", required: false, hint: "bv. 'Community manager'" }
+      - { label: "Auteur initiaal", name: "authorInitial", widget: "string", required: false, pattern: ['^.{0,2}$', 'Max. 2 tekens'] }
+      - label: "Categorie"
+        name: "category"
+        widget: "select"
+        default: "Algemeen"
+        options: ["Algemeen", "Ads & Marketing", "Conversie & UX", "E-mail", "Logistiek", "Community", "Case study"]
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Cover afbeelding", name: "cover", widget: "image", required: false, choose_url: true }
+      - { label: "Cover alt tekst", name: "coverAlt", widget: "string", required: false }
+      - { label: "Leestijd", name: "readingTime", widget: "string", required: false, hint: "bv. '6 min'" }
+      - { label: "Uitgelicht op homepage", name: "featured", widget: "boolean", default: false }
+      - { label: "Artikel", name: "body", widget: "markdown" }
+
+  # ─────────────────────────────────────────────
+  - name: "experts"
+    label: "Experts"
+    label_singular: "Expert"
+    folder: "src/content/experts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "name"
+    summary: "{{name}} — {{role}}"
+    fields:
+      - { label: "Naam", name: "name", widget: "string" }
+      - { label: "Rol / specialisme", name: "role", widget: "string" }
+      - { label: "Tag", name: "tag", widget: "string", hint: "Korte tag, bv. 'Meta Ads'" }
+      - { label: "Portret", name: "photo", widget: "image", required: false }
+      - { label: "Initiaal (fallback)", name: "initial", widget: "string", pattern: ['^.{0,2}$', 'Max. 2 tekens'] }
+      - { label: "Statistiek", name: "stat", widget: "string", hint: "bv. '€8M+ ads managed'" }
+      - { label: "Lid sinds", name: "since", widget: "string", required: false }
+      - { label: "Volgorde", name: "order", widget: "number", required: false, default: 99, hint: "Lager = eerder" }
+      - { label: "Actief", name: "active", widget: "boolean", default: true }
+      - { label: "Bio", name: "body", widget: "markdown", required: false }
+
+  # ─────────────────────────────────────────────
+  - name: "events"
+    label: "Events"
+    label_singular: "Event"
+    folder: "src/content/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} — {{date | date('DD-MM-YYYY')}}"
+    sortable_fields: ['date']
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["Masterclass", "Workshop", "Meetup", "Pod-call"]
+      - { label: "Datum & tijd", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", date_format: "DD-MM-YYYY", time_format: "HH:mm" }
+      - { label: "Eindtijd", name: "endTime", widget: "string", required: false, hint: "bv. '20:30'" }
+      - { label: "Locatie", name: "location", widget: "string", hint: "bv. 'Live op Skool' of 'De Oude Tol, Utrecht'" }
+      - { label: "Uitgelicht", name: "featured", widget: "boolean", default: false }
+      - { label: "Beschrijving", name: "body", widget: "markdown", required: false }
+
+  # ─────────────────────────────────────────────
+  - name: "pricing"
+    label: "Pricing plannen"
+    label_singular: "Plan"
+    folder: "src/content/pricing"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "name"
+    fields:
+      - { label: "Plan naam", name: "name", widget: "string" }
+      - { label: "Beschrijving", name: "desc", widget: "text" }
+      - { label: "Prijs", name: "price", widget: "string", hint: "bv. '€149'" }
+      - { label: "Eenheid", name: "unit", widget: "string", default: "/ maand" }
+      - { label: "Tag (optioneel)", name: "tag", widget: "string", required: false, hint: "bv. 'Meest gekozen'" }
+      - { label: "Featured styling (donker)", name: "featured", widget: "boolean", default: false }
+      - { label: "Volgorde", name: "order", widget: "number", default: 99 }
+      - { label: "Features", name: "features", widget: "list", field: { label: "Feature", name: "feature", widget: "string" } }
+      - { label: "CTA label", name: "cta", widget: "string", default: "Start 14 dagen gratis" }
+      - { label: "CTA url", name: "ctaUrl", widget: "string", default: "#" }
+
+  # ─────────────────────────────────────────────
+  - name: "pages"
+    label: "Losse pagina's"
+    files:
+      - label: "Homepage strings"
+        name: "home"
+        file: "src/content/pages/home.md"
+        fields:
+          - { label: "Hero badge", name: "heroBadge", widget: "string" }
+          - { label: "Hero titel", name: "heroTitle", widget: "string" }
+          - { label: "Hero subkop", name: "heroSub", widget: "text" }
+          - { label: "Primary CTA label", name: "heroCta1", widget: "string" }
+          - { label: "Secondary CTA label", name: "heroCta2", widget: "string" }
