@@ -2,7 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ request, locals }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   const error = url.searchParams.get('error');
@@ -15,11 +15,11 @@ export const GET: APIRoute = async ({ request }) => {
     return renderResult('error', 'Geen autorisatiecode ontvangen van GitHub');
   }
 
-  const clientId = import.meta.env.GITHUB_CLIENT_ID;
-  const clientSecret = import.meta.env.GITHUB_CLIENT_SECRET;
+  const clientId = locals.runtime.env.GITHUB_CLIENT_ID;
+  const clientSecret = locals.runtime.env.GITHUB_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
-    return renderResult('error', 'OAuth niet geconfigureerd');
+    return renderResult('error', 'OAuth env vars niet geconfigureerd in Cloudflare');
   }
 
   let data: { access_token?: string; error?: string; error_description?: string };

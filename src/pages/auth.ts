@@ -2,7 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 
-export const GET: APIRoute = ({ request, redirect }) => {
+export const GET: APIRoute = ({ request, redirect, locals }) => {
   const url = new URL(request.url);
   const provider = url.searchParams.get('provider');
 
@@ -10,9 +10,9 @@ export const GET: APIRoute = ({ request, redirect }) => {
     return new Response('Provider not supported', { status: 400 });
   }
 
-  const clientId = import.meta.env.GITHUB_CLIENT_ID;
+  const clientId = locals.runtime.env.GITHUB_CLIENT_ID;
   if (!clientId) {
-    return new Response('GITHUB_CLIENT_ID not configured', { status: 500 });
+    return new Response('GITHUB_CLIENT_ID niet geconfigureerd', { status: 500 });
   }
 
   const githubUrl = new URL('https://github.com/login/oauth/authorize');
