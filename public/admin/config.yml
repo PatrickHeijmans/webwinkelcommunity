@@ -2,7 +2,8 @@ backend:
   name: github
   repo: PatrickHeijmans/webwinkelcommunity
   branch: main
-  base_url: https://auth.sveltia.app
+  base_url: https://webwinkelcommunity.nl
+  auth_endpoint: /auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
