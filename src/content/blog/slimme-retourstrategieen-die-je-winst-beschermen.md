@@ -53,8 +53,6 @@ Het is duidelijk dat bedrijven die zich richten op het verbeteren van de klanter
 
 ## Het optimaliseren van het retourproces
 
-![](&w=900)
-
 Het optimaliseren van het retourproces is essentieel voor zowel bedrijven als klanten. Wanneer ik een product wil retourneren, wil ik dat dit proces zo eenvoudig mogelijk is. Bedrijven die een gebruiksvriendelijke retourprocedure aanbieden, maken het voor mij aantrekkelijker om bij hen te kopen.
 
 Dit kan bijvoorbeeld door het aanbieden van vooraf betaalde retourlabels of door het faciliteren van retourzendingen in fysieke winkels. Als ik mijn retourzending gemakkelijk kan afhandelen, ben ik eerder geneigd om opnieuw bij hetzelfde bedrijf te winkelen. Bovendien is transparantie in het retourproces belangrijk voor mijn vertrouwen in een bedrijf.
