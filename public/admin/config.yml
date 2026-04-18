@@ -2,7 +2,7 @@ backend:
   name: github
   repo: PatrickHeijmans/webwinkelcommunity
   branch: main
-  base_url: https://webwinkelcommunity.nl
+  base_url: https://webwinkelcommunity.square-night-6fce.workers.dev
   auth_endpoint: /auth
 
 media_folder: "public/uploads"
@@ -10,8 +10,8 @@ public_folder: "/uploads"
 
 publish_mode: editorial_workflow
 
-site_url: https://webwinkelcommunity.nl
-display_url: https://webwinkelcommunity.nl
+site_url: https://webwinkelcommunity.square-night-6fce.workers.dev
+display_url: https://webwinkelcommunity.square-night-6fce.workers.dev
 logo_url: /favicon.svg
 
 locale: "nl"
