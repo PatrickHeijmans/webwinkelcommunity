@@ -89,8 +89,6 @@ Het is dus essentieel dat bedrijven zorgvuldig nadenken over hoe ze deze kosten 
 
 ## Het aanbieden van alternatieve oplossingen voor retourzendingen
 
-![](&w=900)
-
 Als consument waardeer ik het wanneer bedrijven alternatieve oplossingen voor retourzendingen aanbieden. In plaats van simpelweg een product terug te sturen, kunnen bedrijven bijvoorbeeld ruilmogelijkheden of tegoedbonnen aanbieden. Dit geeft mij de kans om iets anders uit te kiezen zonder dat ik opnieuw verzendkosten hoef te betalen of tijd kwijt ben aan het retourneren van een product.
 
 Het biedt ook bedrijven de mogelijkheid om hun omzet te verhogen door klanten aan te moedigen opnieuw bij hen te kopen. Daarnaast kan het aanbieden van reparatie- of refurbish-diensten ook een aantrekkelijke optie zijn voor klanten zoals ik. In plaats van een product terug te sturen omdat het defect is of niet naar wens functioneert, kan ik kiezen voor een reparatie of vervangend onderdeel.
