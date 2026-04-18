@@ -105,7 +105,7 @@ Door deze geluiden in mijn video’s te integreren, vergroot ik de kans dat mijn
 
 ## Het meten van succes: hoe bepaal je of jouw TikTok-trend strategie werkt?
 
-![](&w=900)
+![]()
 
 Het meten van succes op TikTok kan soms uitdagend zijn, maar er zijn verschillende indicatoren die ik gebruik om te bepalen of mijn strategie effectief is. Ten eerste kijk ik naar de betrokkenheid bij mijn video’s, zoals likes, shares en reacties. Een hoge betrokkenheid betekent meestal dat mijn content goed resoneert met kijkers en dat ze geïnteresseerd zijn in wat ik aanbied.
 
