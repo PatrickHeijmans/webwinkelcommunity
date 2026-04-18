@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --navy: #133653;
+  --navy-900: #0c2538;
+  --navy-700: #1a466c;
+  --navy-500: #4a7ba8;
+  --orange: #ff9900;
+  --orange-600: #e88700;
+  --orange-50: #fff6e6;
+
+  --bg: #fafaf7;
+  --bg-2: #ffffff;
+  --bg-3: #f3f2ec;
+  --fg: #0c2538;
+  --fg-muted: #4f6478;
+  --fg-subtle: #7a8a9a;
+  --border: #e6e4db;
+  --border-strong: #d6d3c6;
+  --card: #ffffff;
+  --card-shadow: 0 1px 2px rgba(12, 37, 56, 0.04), 0 8px 24px -12px rgba(12, 37, 56, 0.10);
+}
+
+[data-theme="dark"] {
+  --bg: #0a1e30;
+  --bg-2: #0f2a40;
+  --bg-3: #143652;
+  --fg: #f0f4f8;
+  --fg-muted: #a8b8c8;
+  --fg-subtle: #7b8fa3;
+  --border: #1e4163;
+  --border-strong: #2a5376;
+  --card: #0f2a40;
+  --card-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px; line-height: 1.55;
+  background: var(--bg); color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; margin: 0; }
+p { margin: 0; } a { color: inherit; text-decoration: none; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+.container-narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-weight: 500; font-size: 14px; transition: all 0.2s; white-space: nowrap; cursor: pointer; border: none; }
+.btn-primary { background: var(--orange); color: #1a1305; box-shadow: 0 1px 2px rgba(255,153,0,0.2), 0 8px 20px -6px rgba(255,153,0,0.4); }
+.btn-primary:hover { background: var(--orange-600); }
+.btn-secondary { background: var(--bg-2); color: var(--fg); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--navy); }

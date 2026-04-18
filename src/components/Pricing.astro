@@ -1,0 +1,65 @@
+---
+const plans = [
+  { name: 'Starter', desc: 'Voor webshops in opbouw of tot €10k/mnd omzet', price: '€49', unit: '/ maand', features: ['Volledige Skool community toegang', '50+ masterclasses on-demand', 'Templates & tools bibliotheek', 'Maandelijkse Q&A met expert'] },
+  { name: 'Growth', desc: 'Voor actieve shops tussen €10k-€100k/mnd', tag: 'Meest gekozen', price: '€149', unit: '/ maand', featured: true, features: ['Alles uit Starter', 'Toegang tot accountability pods', 'Wekelijkse live masterclasses', '2× 1:1 call per jaar met expert', 'Fysieke events (4× per jaar)'] },
+  { name: 'Scale', desc: 'Voor 7-cijferige shops en ambitieuze teams', price: '€399', unit: '/ maand', features: ['Alles uit Growth', 'Mastermind pod (max. 6 leden)', 'Maandelijkse 1:1 strategy call', 'Prioriteit in community support', 'Team seats (tot 3 personen)'] }
+];
+---
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Lidmaatschap</div>
+      <h2>Kies het plan dat past bij <em>jouw fase</em></h2>
+      <p class="section-sub">Alle plannen: 14 dagen proberen, maandelijks opzegbaar. Upgrade of downgrade wanneer je wilt.</p>
+    </div>
+    <div class="pricing-grid">
+      {plans.map(p => (
+        <div class={`plan ${p.featured ? 'featured' : ''}`}>
+          {p.tag && <div class="plan-tag">{p.tag}</div>}
+          <div class="plan-name">{p.name}</div>
+          <div class="plan-desc">{p.desc}</div>
+          <div class="plan-price">
+            <span class="plan-price-val">{p.price}</span>
+            <span class="plan-price-unit">{p.unit}</span>
+          </div>
+          <ul class="plan-feat">
+            {p.features.map(f => <li>{f}</li>)}
+          </ul>
+          <div class="plan-cta">
+            <a href="#" class={p.featured ? 'btn btn-primary' : 'btn btn-secondary'}>
+              {p.featured ? 'Word lid' : 'Start 14 dagen gratis'}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: 120px 0; }
+  .section-head { max-width: 680px; margin-bottom: 64px; }
+  .section-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--orange-600); margin-bottom: 16px; }
+  .section-kicker::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+  .section h2 { font-size: clamp(36px, 4.5vw, 56px); }
+  .section h2 :global(em) { font-style: italic; color: var(--orange-600); }
+  .section-sub { margin-top: 18px; font-size: 18px; color: var(--fg-muted); max-width: 620px; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .plan { background: var(--card); border: 1px solid var(--border); border-radius: 22px; padding: 36px 32px; position: relative; display: flex; flex-direction: column; }
+  .plan.featured { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .plan.featured .plan-desc, .plan.featured .plan-price-unit { color: rgba(255,255,255,0.7); }
+  .plan.featured .plan-feat { border-top-color: rgba(255,255,255,0.12); }
+  .plan.featured .plan-feat li::before { color: var(--orange); }
+  .plan-tag { position: absolute; top: -12px; left: 32px; background: var(--orange); color: var(--navy); padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .plan-name { font-weight: 600; font-size: 16px; }
+  .plan-desc { font-size: 14px; color: var(--fg-muted); margin-top: 6px; }
+  .plan-price { margin-top: 28px; display: flex; align-items: baseline; gap: 6px; }
+  .plan-price-val { font-family: 'Instrument Serif'; font-size: 56px; }
+  .plan-price-unit { font-size: 14px; color: var(--fg-muted); }
+  .plan-feat { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .plan-feat li { display: flex; gap: 10px; font-size: 14px; }
+  .plan-feat li::before { content: '✓'; color: var(--orange-600); font-weight: 700; }
+  .plan-cta { margin-top: 28px; }
+  .plan-cta .btn { width: 100%; justify-content: center; }
+  @media (max-width: 960px) { .pricing-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,158 @@
+---
+import { translations } from '../i18n';
+interface Props { lang?: 'nl' | 'en'; }
+const { lang = 'nl' } = Astro.props;
+const t = translations[lang].hero;
+const posts = [
+  { initial: 'M', name: 'Mieke van den Berg', time: '2 min', tag: 'Ads', color: '#ff9900', text: 'Vandaag €12k dagomzet gehaald met de nieuwe Meta ads structuur uit de masterclass van vorige week! Iemand anders die deze al getest heeft?', likes: 47, comments: 12 },
+  { initial: 'J', name: 'Jeroen Hofstra', time: '14 min', tag: 'Logistiek', color: '#133653', text: 'Vraag: wie heeft ervaring met PostNL vs DHL voor pakketten onder 2kg? Onderhandelingen starten volgende week...', likes: 18, comments: 23 }
+];
+---
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="badge-row">
+          <span class="badge badge-skool">
+            <span class="badge-skool-mark">s</span>{t.badge}
+          </span>
+          <span class="badge">
+            <span class="badge-dot"></span>{t.badgeActive}
+          </span>
+        </div>
+        <h1>{t.title1}<em>{t.titleEm}</em>{t.title2}</h1>
+        <p class="hero-sub">{t.sub}</p>
+        <div class="hero-cta">
+          <a href="#pricing" class="btn btn-primary">{t.cta1} →</a>
+          <a href="#community" class="btn btn-secondary">{t.cta2}</a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatars">
+            {['#ff9900','#133653','#1a466c','#4a7ba8','#ff9900'].map((c, i) => (
+              <div class="avatar" style={`background: linear-gradient(135deg, ${c}, ${c}aa); display: grid; place-items: center; color: #fff; font-size: 13px; font-weight: 600;`}>
+                {['L','K','D','S','R'][i]}
+              </div>
+            ))}
+          </div>
+          <div class="proof-text">
+            <div><strong>{t.proof1}</strong></div>
+            <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
+              <span class="stars">★★★★★</span> {t.proof2}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <div class="floating-stat top-right">
+          <div class="stat-icon orange">⚡</div>
+          <div>
+            <div class="stat-val">+127%</div>
+            <div class="stat-lbl">Gem. omzetgroei in 12 mnd</div>
+          </div>
+        </div>
+        <div class="skool-preview">
+          <div class="skool-header">
+            <div class="skool-logo">s</div>
+            <div style="flex: 1">
+              <div class="skool-title">WebwinkelCommunity</div>
+              <div class="skool-meta">
+                <span>skool.com/webwinkel</span><span>•</span>
+                <span style="display:inline-flex;align-items:center;gap:4px;">
+                  <span class="badge-dot" style="width:6px;height:6px;box-shadow:none;"></span>23 online
+                </span>
+              </div>
+            </div>
+            <div class="btn btn-primary" style="padding: 8px 14px; font-size: 13px;">Joined</div>
+          </div>
+          <div class="skool-tabs">
+            <div class="skool-tab active">Community</div>
+            <div class="skool-tab">Classroom</div>
+            <div class="skool-tab">Calendar</div>
+            <div class="skool-tab">Members</div>
+            <div class="skool-tab">About</div>
+          </div>
+          <div class="skool-feed">
+            {posts.map(p => (
+              <div class="post">
+                <div class="post-avatar" style={`background: ${p.color}`}>{p.initial}</div>
+                <div class="post-body">
+                  <div class="post-head">
+                    <span class="post-author">{p.name}</span>
+                    <span class="post-time">{p.time}</span>
+                    <span class="post-tag">{p.tag}</span>
+                  </div>
+                  <div class="post-content">{p.text}</div>
+                  <div class="post-actions">
+                    <span>♥ {p.likes}</span><span>💬 {p.comments}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="floating-stat bottom-left">
+          <div class="stat-icon navy">👥</div>
+          <div>
+            <div class="stat-val">500+</div>
+            <div class="stat-lbl">Actieve leden</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding: 80px 0 100px; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+  .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(to right, color-mix(in oklab, var(--border) 50%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--border) 50%, transparent) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black 30%, transparent 80%); pointer-events: none; }
+  .hero > .container { position: relative; z-index: 1; }
+  .badge-row { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 8px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--border); font-size: 13px; font-weight: 500; color: var(--fg-muted); }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px color-mix(in oklab, #22c55e 20%, transparent); }
+  .badge-skool { background: var(--navy); color: #fff; border-color: var(--navy); padding: 6px 14px 6px 10px; }
+  .badge-skool-mark { width: 18px; height: 18px; border-radius: 5px; background: var(--orange); display: grid; place-items: center; font-size: 11px; font-weight: 700; color: var(--navy); }
+  .hero h1 { font-size: clamp(44px, 6vw, 82px); letter-spacing: -0.02em; }
+  .hero h1 :global(em) { font-style: italic; color: var(--orange); }
+  .hero-sub { margin-top: 24px; font-size: 19px; color: var(--fg-muted); max-width: 560px; }
+  .hero-cta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .hero-proof { margin-top: 40px; display: flex; align-items: center; gap: 20px; }
+  .avatars { display: flex; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--bg); margin-left: -10px; }
+  .avatar:first-child { margin-left: 0; }
+  .proof-text { font-size: 13px; color: var(--fg-muted); }
+  .proof-text strong { color: var(--fg); font-weight: 600; }
+  .stars { color: var(--orange); letter-spacing: -1px; }
+  .skool-preview { background: var(--card); border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 18px 40px -14px rgba(12,37,56,0.18); overflow: hidden; }
+  .skool-header { padding: 18px 22px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+  .skool-logo { width: 40px; height: 40px; border-radius: 10px; background: var(--navy); display: grid; place-items: center; color: var(--orange); font-weight: 700; font-size: 18px; }
+  .skool-title { font-weight: 600; font-size: 15px; }
+  .skool-meta { font-size: 12px; color: var(--fg-muted); display: flex; gap: 10px; align-items: center; margin-top: 2px; }
+  .skool-tabs { display: flex; gap: 2px; padding: 0 14px; border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 500; color: var(--fg-muted); overflow-x: auto; }
+  .skool-tab { padding: 12px 14px; position: relative; cursor: pointer; white-space: nowrap; }
+  .skool-tab.active { color: var(--fg); }
+  .skool-tab.active::after { content: ''; position: absolute; left: 14px; right: 14px; bottom: -1px; height: 2px; background: var(--orange); }
+  .skool-feed { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .post { padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; display: flex; gap: 12px; }
+  .post-avatar { width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; font-weight: 600; font-size: 14px; color: #fff; }
+  .post-body { flex: 1; min-width: 0; }
+  .post-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .post-author { font-weight: 600; font-size: 14px; }
+  .post-time { font-size: 12px; color: var(--fg-subtle); }
+  .post-tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--orange-50); color: var(--orange-600); font-weight: 500; }
+  .post-content { font-size: 14px; margin-top: 4px; line-height: 1.5; }
+  .post-actions { display: flex; gap: 14px; margin-top: 10px; font-size: 12px; color: var(--fg-muted); }
+  .floating-stat { position: absolute; background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--card-shadow); padding: 14px 16px; display: flex; align-items: center; gap: 12px; z-index: 2; }
+  .floating-stat.top-right { top: 24px; right: -30px; }
+  .floating-stat.bottom-left { bottom: 30px; left: -40px; }
+  .stat-icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; font-size: 20px; }
+  .stat-icon.orange { background: var(--orange-50); color: var(--orange-600); }
+  .stat-icon.navy { background: color-mix(in oklab, var(--navy) 10%, transparent); color: var(--navy); }
+  .stat-val { font-weight: 600; font-size: 16px; }
+  .stat-lbl { font-size: 11px; color: var(--fg-muted); margin-top: 2px; }
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .floating-stat { display: none; }
+  }
+</style>

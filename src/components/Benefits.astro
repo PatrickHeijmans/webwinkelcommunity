@@ -1,0 +1,49 @@
+---
+const items = [
+  { title: 'Dagelijkse Skool community', desc: 'Stel je vraag, krijg binnen uren antwoord. Van advertentiestrategie tot koeriersonderhandelingen — een community die écht meedenkt.', features: ['24/7 toegang tot de feed', 'Gespreksthreads per niche', 'Doorzoekbaar kennisarchief'], icon: '👥' },
+  { title: 'Wekelijkse masterclasses', desc: 'Elke donderdag live met een expert. Opnames blijven beschikbaar, dus je mist nooit wat.', features: ['Live Q&A per sessie', 'Slides & templates inbegrepen', '50+ opnames in bibliotheek'], icon: '🎓', orange: true },
+  { title: 'Accountability groepen', desc: 'Kleine pods van 5-8 ondernemers op jouw niveau. Wekelijkse check-ins, concrete doelen, echte progressie.', features: ['Gematcht op omzetniveau', 'Wekelijkse pod-calls', 'Privé thread per groep'], icon: '🎯' }
+];
+---
+<section class="section" id="benefits">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Waarom wij</div>
+      <h2>Alles wat je nodig hebt om <em>écht</em> te groeien</h2>
+      <p class="section-sub">Geen losse cursussen, geen oppervlakkige tips. Een geïntegreerde community waarin je leert, netwerkt en verantwoording aflegt — elke week.</p>
+    </div>
+    <div class="benefits-grid">
+      {items.map(item => (
+        <div class="benefit">
+          <div class={`benefit-icon ${item.orange ? 'orange' : ''}`}>{item.icon}</div>
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+          <ul class="benefit-feat">
+            {item.features.map(f => <li>{f}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: 120px 0; }
+  .section-head { max-width: 680px; margin-bottom: 64px; }
+  .section-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--orange-600); margin-bottom: 16px; }
+  .section-kicker::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+  .section h2 { font-size: clamp(36px, 4.5vw, 56px); }
+  .section h2 :global(em) { font-style: italic; color: var(--orange-600); }
+  .section-sub { margin-top: 18px; font-size: 18px; color: var(--fg-muted); max-width: 620px; }
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .benefit { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; box-shadow: var(--card-shadow); transition: all 0.2s; }
+  .benefit:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+  .benefit-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--navy); color: var(--orange); display: grid; place-items: center; margin-bottom: 24px; font-size: 24px; }
+  .benefit-icon.orange { background: var(--orange); color: var(--navy); }
+  .benefit h3 { font-family: 'Inter'; font-weight: 600; font-size: 20px; margin-bottom: 10px; }
+  .benefit p { color: var(--fg-muted); font-size: 15px; line-height: 1.6; }
+  .benefit-feat { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 8px; }
+  .benefit-feat li { display: flex; gap: 8px; font-size: 13px; color: var(--fg-muted); }
+  .benefit-feat li::before { content: '✓'; color: var(--orange-600); font-weight: 700; }
+  @media (max-width: 960px) { .benefits-grid { grid-template-columns: 1fr; } }
+</style>

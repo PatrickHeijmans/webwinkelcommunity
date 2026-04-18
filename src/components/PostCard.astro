@@ -1,0 +1,55 @@
+---
+interface Props {
+  post: {
+    slug: string;
+    data: {
+      title: string;
+      excerpt?: string;
+      author: string;
+      authorInitial?: string;
+      category: string;
+      pubDate: Date;
+      readingTime?: string;
+      cover?: string;
+    };
+  };
+}
+const { post } = Astro.props;
+const { title, excerpt, author, authorInitial, category, pubDate, readingTime, cover } = post.data;
+const date = new Date(pubDate).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' });
+const initial = authorInitial || author.charAt(0);
+---
+
+<article class="post-card">
+  <a href={`/blog/${post.slug}`} class="post-link">
+    <div class="post-img" style={cover ? `background-image: url('${cover}'); background-size: cover; background-position: center;` : ''}>
+      <span class="post-cat">{category}</span>
+    </div>
+    <div class="post-body">
+      <h4>{title}</h4>
+      {excerpt && <p class="post-excerpt">{excerpt}</p>}
+      <div class="post-footer">
+        <div class="author-avatar">{initial}</div>
+        <span>{author}</span>
+        <span class="meta-dot"></span>
+        <span>{date}</span>
+        {readingTime && <><span class="meta-dot"></span><span>{readingTime}</span></>}
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .post-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: all 0.2s; }
+  .post-card:hover { transform: translateY(-2px); box-shadow: var(--card-shadow); border-color: var(--border-strong); }
+  .post-link { display: flex; flex-direction: column; height: 100%; }
+  .post-img { aspect-ratio: 16/10; background-image: repeating-linear-gradient(135deg, color-mix(in oklab, var(--navy) 6%, var(--bg-3)) 0 12px, var(--bg-3) 12px 24px); position: relative; }
+  .post-cat { position: absolute; top: 12px; left: 12px; background: var(--card); color: var(--fg); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+  .post-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+  h4 { font-family: 'Inter'; font-weight: 600; font-size: 17px; line-height: 1.35; letter-spacing: -0.01em; }
+  .post-card:hover h4 { color: var(--orange-600); }
+  .post-excerpt { margin-top: 10px; font-size: 14px; color: var(--fg-muted); line-height: 1.55; flex: 1; }
+  .post-footer { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--fg-subtle); flex-wrap: wrap; }
+  .author-avatar { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy-500)); color: #fff; display: grid; place-items: center; font-size: 10px; font-weight: 600; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--fg-subtle); }
+</style>

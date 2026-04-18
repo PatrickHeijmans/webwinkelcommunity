@@ -1,0 +1,57 @@
+---
+const experts = [
+  { name: 'Sanne de Boer', role: 'Performance Marketing', initial: 'S', tag: 'Meta Ads', stat: '€8M+ ads managed', since: 'Lid sinds 2022' },
+  { name: 'Thijs Kroon', role: 'Conversie & UX', initial: 'T', tag: 'CRO', stat: '+41% avg. uplift', since: 'Lid sinds 2021' },
+  { name: 'Iris Vermeulen', role: 'E-mail & Lifecycle', initial: 'I', tag: 'Klaviyo', stat: '22% revenue share', since: 'Lid sinds 2023' },
+  { name: 'Daan Hendriks', role: 'Fulfilment & Ops', initial: 'D', tag: 'Logistiek', stat: '3PL expert', since: 'Lid sinds 2021' }
+];
+---
+<section class="section" id="experts">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">De experts</div>
+      <h2>Leer van mensen die <em>het gedaan</em> hebben</h2>
+      <p class="section-sub">Onze experts runnen of runden zelf succesvolle webshops. Geen theorie, alleen bewezen tactieken die werken voor de Nederlandse markt.</p>
+    </div>
+    <div class="experts-grid">
+      {experts.map(e => (
+        <div class="expert">
+          <div class="expert-img">
+            <div class="expert-tag">{e.tag}</div>
+            <div class="expert-img-inner">{e.initial}</div>
+          </div>
+          <div class="expert-body">
+            <div class="expert-name">{e.name}</div>
+            <div class="expert-role">{e.role}</div>
+            <div class="expert-stat">
+              <span><strong>{e.stat}</strong></span>
+              <span>{e.since}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: 0 0 120px; }
+  .section-head { max-width: 680px; margin-bottom: 64px; }
+  .section-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--orange-600); margin-bottom: 16px; }
+  .section-kicker::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+  .section h2 { font-size: clamp(36px, 4.5vw, 56px); }
+  .section h2 :global(em) { font-style: italic; color: var(--orange-600); }
+  .section-sub { margin-top: 18px; font-size: 18px; color: var(--fg-muted); max-width: 620px; }
+  .experts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .expert { background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: all 0.2s; }
+  .expert:hover { transform: translateY(-2px); box-shadow: var(--card-shadow); }
+  .expert-img { aspect-ratio: 1; background-image: repeating-linear-gradient(135deg, color-mix(in oklab, var(--navy) 7%, var(--bg-3)) 0 10px, var(--bg-3) 10px 20px); position: relative; display: grid; place-items: center; }
+  .expert-img-inner { width: 80%; height: 80%; border-radius: 50%; background: var(--card); display: grid; place-items: center; font-family: 'Instrument Serif'; font-size: 56px; color: var(--navy); font-style: italic; border: 1px solid var(--border); }
+  .expert-tag { position: absolute; top: 12px; left: 12px; background: var(--orange); color: var(--navy); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+  .expert-body { padding: 18px; }
+  .expert-name { font-weight: 600; font-size: 16px; }
+  .expert-role { font-size: 13px; color: var(--fg-muted); margin-top: 2px; }
+  .expert-stat { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--fg-subtle); display: flex; justify-content: space-between; }
+  .expert-stat strong { color: var(--fg); font-weight: 600; }
+  @media (max-width: 960px) { .experts-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

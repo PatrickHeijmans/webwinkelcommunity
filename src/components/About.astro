@@ -1,0 +1,68 @@
+---
+const stats = [
+  { val: '500+', lbl: 'Actieve leden' },
+  { val: '4 jr', lbl: 'Community opgebouwd' },
+  { val: '120+', lbl: 'Masterclasses georganiseerd' },
+  { val: '94%', lbl: 'Jaarlijkse retentie' }
+];
+---
+<section class="section about-section" id="community">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-kicker">Onze missie</div>
+        <h2 style="color:#fff">Nederlandse webshop ondernemers <em>samen</em> sterker maken</h2>
+        <p class="section-sub">Ondernemen is eenzaam. Google, Meta en TikTok veranderen elke maand de regels. Wij geloven dat een échte community — waar mensen elkaar helpen in plaats van elkaar te verkopen — het verschil maakt tussen overleven en floreren.</p>
+        <p class="section-sub" style="margin-top:16px">Daarom bouwen we al sinds 2021 aan WebwinkelCommunity. Geen cursus-fabriek. Geen beloftes van "financiële vrijheid binnen 90 dagen." Gewoon ondernemers die samen leren, groeien en elkaar scherp houden.</p>
+        <div class="mission-stats">
+          {stats.map(s => (
+            <div class="mission-stat">
+              <div class="mission-stat-val">{s.val}</div>
+              <div class="mission-stat-lbl">{s.lbl}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="orbit"></div>
+        <div class="orbit inner"></div>
+        <div class="orbit-center">s</div>
+        {[
+          { top: '10%', left: '50%', letter: 'M' },
+          { top: '30%', left: '88%', letter: 'J' },
+          { top: '72%', left: '82%', letter: 'I' },
+          { top: '85%', left: '38%', letter: 'D' },
+          { top: '52%', left: '8%', letter: 'S' },
+          { top: '18%', left: '18%', letter: 'T' },
+          { top: '42%', left: '68%', letter: 'L' },
+          { top: '62%', left: '28%', letter: 'R' }
+        ].map(p => (
+          <div class="orbit-item" style={`top: ${p.top}; left: ${p.left}; transform: translate(-50%, -50%);`}>{p.letter}</div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: 120px 0; }
+  .about-section { background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+  .about-section::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, color-mix(in oklab, var(--orange) 15%, transparent), transparent 40%), radial-gradient(circle at 80% 70%, color-mix(in oklab, var(--navy-500) 30%, transparent), transparent 40%); opacity: 0.5; }
+  .about-section > .container { position: relative; }
+  .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; }
+  .section-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--orange); margin-bottom: 16px; }
+  .section-kicker::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+  .about-section h2 { font-size: clamp(36px, 4.5vw, 56px); }
+  .about-section h2 :global(em) { font-style: italic; color: var(--orange); }
+  .section-sub { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 620px; margin-top: 18px; }
+  .mission-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+  .mission-stat { padding: 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; background: rgba(255,255,255,0.03); }
+  .mission-stat-val { font-family: 'Instrument Serif'; font-size: 56px; font-style: italic; color: var(--orange); }
+  .mission-stat-lbl { margin-top: 8px; font-size: 13px; color: rgba(255,255,255,0.7); }
+  .about-visual { aspect-ratio: 1; border-radius: 24px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); position: relative; padding: 32px; }
+  .orbit { position: absolute; inset: 32px; border: 1px dashed rgba(255,255,255,0.15); border-radius: 50%; }
+  .orbit.inner { inset: 80px; border-color: rgba(255,255,255,0.2); }
+  .orbit-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; background: var(--orange); color: var(--navy); display: grid; place-items: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 0 8px rgba(255,153,0,0.15), 0 0 0 24px rgba(255,153,0,0.06); }
+  .orbit-item { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); display: grid; place-items: center; font-family: 'Instrument Serif'; color: #fff; font-style: italic; font-size: 18px; }
+  @media (max-width: 960px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+</style>

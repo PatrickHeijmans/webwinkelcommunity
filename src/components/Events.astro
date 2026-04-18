@@ -1,0 +1,90 @@
+---
+const events = [
+  { day: '22', month: 'APR', type: 'Masterclass', title: 'Meta Ads scaling playbook voor €50k+/mnd shops', meta: ['19:00 — 20:30', 'Live op Skool'], featured: true },
+  { day: '28', month: 'APR', type: 'Workshop', title: 'Conversie-optimalisatie: 12 tests die altijd werken', meta: ['13:00 — 15:00', 'Online'] },
+  { day: '06', month: 'MEI', type: 'Meetup', title: 'WebwinkelBorrel Utrecht — Q2 editie', meta: ['18:30 — 22:00', 'De Oude Tol'] },
+  { day: '14', month: 'MEI', type: 'Masterclass', title: 'Van fulfilment naar eigen magazijn: wanneer schakel je?', meta: ['19:00 — 20:30', 'Live op Skool'] }
+];
+const types = [
+  { color: '#ff9900', label: 'Masterclass' },
+  { color: '#133653', label: 'Workshop' },
+  { color: '#22c55e', label: 'Meetup' },
+  { color: '#a855f7', label: 'Pod-call' }
+];
+---
+<section class="section events-section" id="events">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">Aankomende events</div>
+      <h2>Elke week iets <em>nieuws</em> te leren</h2>
+      <p class="section-sub">Masterclasses, workshops, netwerkborrels en jaarlijkse live events. Vaak meer dan 4 events per maand — zowel online als fysiek.</p>
+    </div>
+    <div class="events-layout">
+      <div>
+        <div class="events-list">
+          {events.map(e => (
+            <div class={`event ${e.featured ? 'featured' : ''}`}>
+              <div class="event-date">
+                <div class="day">{e.day}</div>
+                <div class="month">{e.month}</div>
+              </div>
+              <div>
+                <span class="event-type">{e.type}</span>
+                <div class="event-title">{e.title}</div>
+                <div class="event-meta">
+                  <span>{e.meta[0]}</span><span>•</span><span>{e.meta[1]}</span>
+                </div>
+              </div>
+              <div class="event-arrow">→</div>
+            </div>
+          ))}
+        </div>
+        <div style="margin-top: 20px">
+          <a href="#" class="btn btn-secondary">Volledige agenda →</a>
+        </div>
+      </div>
+      <div class="events-viz">
+        <div class="upcoming-types">
+          {types.map(t => (
+            <span class="type-pill">
+              <span class="dot" style={`background: ${t.color}`}></span>{t.label}
+            </span>
+          ))}
+        </div>
+        <p style="margin-top:20px; color: var(--fg-muted); font-size: 14px;">Alle events staan in de gedeelde Skool-calendar. Members krijgen 24u tevoren een herinnering.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: 120px 0; }
+  .events-section { background: var(--bg-2); }
+  .section-head { max-width: 680px; margin-bottom: 64px; }
+  .section-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--orange-600); margin-bottom: 16px; }
+  .section-kicker::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+  .section h2 { font-size: clamp(36px, 4.5vw, 56px); }
+  .section h2 :global(em) { font-style: italic; color: var(--orange-600); }
+  .section-sub { margin-top: 18px; font-size: 18px; color: var(--fg-muted); max-width: 620px; }
+  .events-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; }
+  .events-list { display: flex; flex-direction: column; gap: 12px; }
+  .event { padding: 22px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; transition: all 0.2s; }
+  .event:hover { border-color: var(--orange); }
+  .event.featured { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .event.featured .event-meta { color: rgba(255,255,255,0.6); }
+  .event.featured .event-type { background: var(--orange); color: var(--navy); }
+  .event-date { width: 64px; text-align: center; padding: 8px 0; border-right: 1px solid var(--border); }
+  .event.featured .event-date { border-right-color: rgba(255,255,255,0.15); }
+  .event-date .day { font-family: 'Instrument Serif'; font-size: 32px; font-style: italic; }
+  .event-date .month { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; color: var(--fg-muted); font-weight: 500; }
+  .event.featured .event-date .month { color: rgba(255,255,255,0.6); }
+  .event-type { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--orange-50); color: var(--orange-600); font-size: 11px; font-weight: 600; margin-bottom: 6px; }
+  .event-title { font-weight: 600; font-size: 16px; }
+  .event-meta { font-size: 12px; color: var(--fg-muted); margin-top: 4px; display: flex; gap: 10px; }
+  .event-arrow { color: var(--fg-subtle); }
+  .events-viz { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; }
+  .upcoming-types { display: flex; gap: 8px; flex-wrap: wrap; }
+  .type-pill { font-size: 12px; padding: 6px 12px; border-radius: 999px; background: var(--bg-3); color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .type-pill .dot { width: 6px; height: 6px; border-radius: 50%; }
+  @media (max-width: 960px) { .events-layout { grid-template-columns: 1fr; gap: 32px; } }
+</style>

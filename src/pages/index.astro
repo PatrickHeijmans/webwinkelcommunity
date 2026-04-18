@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Benefits from '../components/Benefits.astro';
+import Experts from '../components/Experts.astro';
+import Events from '../components/Events.astro';
+import Pricing from '../components/Pricing.astro';
+import About from '../components/About.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const latest = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="De community voor serieuze webshop ondernemers">
+  <Hero />
+  <Benefits />
+  <Experts />
+  <Events />
+  <Pricing />
+  <About />
+
+  {latest.length > 0 && (
+    <section style="padding: 120px 0; background: var(--bg-2); border-top: 1px solid var(--border);">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px;">
+          <h2 style="font-size: clamp(36px, 4.5vw, 56px);">Laatste artikelen</h2>
+          <a href="/blog" style="color: var(--orange-600); font-weight: 500; font-size: 14px;">Alle artikelen →</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+          {latest.map(p => <PostCard post={p} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <FinalCTA />
+</BaseLayout>

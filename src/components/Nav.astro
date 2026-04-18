@@ -1,0 +1,37 @@
+---
+const path = Astro.url.pathname;
+const isActive = (p: string) => path === p || path.startsWith(p + '/') ? 'active' : '';
+---
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark"></span>
+      <span>Webwinkel<span style="color: var(--orange-600)">Community</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/#community">Community</a>
+      <a href="/#experts">Experts</a>
+      <a href="/#events">Events</a>
+      <a href="/blog" class={isActive('/blog')}>Blog</a>
+      <a href="/#pricing">Lidmaatschap</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/login" class="btn btn-ghost">Inloggen</a>
+      <a href="/#pricing" class="btn btn-primary">Word lid →</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); background: color-mix(in oklab, var(--bg) 85%, transparent); border-bottom: 1px solid var(--border); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 32px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; }
+  .logo-mark { width: 32px; height: 32px; border-radius: 9px; background: var(--navy); position: relative; }
+  .logo-mark::before { content: ''; position: absolute; inset: 4px; border-radius: 6px; background: var(--orange); clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 100%, 0 100%); }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--fg-muted); }
+  .nav-links a.active, .nav-links a:hover { color: var(--fg); font-weight: 500; }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .btn-ghost { padding: 8px 14px; color: var(--fg-muted); background: transparent; font-size: 14px; }
+  @media (max-width: 900px) { .nav-links { display: none; } }
+</style>

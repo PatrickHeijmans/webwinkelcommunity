@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const allPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featured = allPosts.find(p => p.data.featured) || allPosts[0];
+const rest = allPosts.filter(p => p.slug !== featured?.slug);
+
+const categories = ['Alle', ...new Set(allPosts.map(p => p.data.category))];
+---
+
+<BaseLayout title="Blog" description="Kennisbank voor webshop ondernemers — praktische tactieken, case studies en founder stories.">
+  <section class="blog-header">
+    <div class="container">
+      <div class="blog-kicker">Kennisbank voor webshop ondernemers</div>
+      <h1>De <em>Blog</em></h1>
+      <p>Praktische tactieken, case studies en founder stories — geschreven door community-leden die het zelf doen.</p>
+    </div>
+  </section>
+
+  <div class="container cats">
+    {categories.map(c => <a href={c === 'Alle' ? '/blog' : `/blog/category/${c.toLowerCase()}`} class={`cat ${c === 'Alle' ? 'active' : ''}`}>{c}</a>)}
+  </div>
+
+  {featured && (
+    <section class="featured">
+      <div class="container">
+        <div class="featured-card">
+          <div class="featured-img" style={featured.data.cover ? `background-image: url('${featured.data.cover}'); background-size: cover; background-position: center;` : ''}></div>
+          <div>
+            <span class="featured-tag">Featured · {featured.data.category}</span>
+            <h2><a href={`/blog/${featured.slug}`}>{featured.data.title}</a></h2>
+            {featured.data.excerpt && <p class="featured-excerpt">{featured.data.excerpt}</p>}
+            <div class="post-meta">
+              <div class="author-avatar">{featured.data.authorInitial || featured.data.author.charAt(0)}</div>
+              <span style="color: var(--fg); font-weight: 500">{featured.data.author}</span>
+              <span class="meta-dot"></span>
+              <span>{new Date(featured.data.pubDate).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+              {featured.data.readingTime && <><span class="meta-dot"></span><span>{featured.data.readingTime}</span></>}
+            </div>
+            <div style="margin-top: 28px">
+              <a href={`/blog/${featured.slug}`} class="btn btn-primary">Lees artikel →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="posts-section">
+    <div class="container">
+      <div class="posts-head">
+        <h3>Alle artikelen</h3>
+        <span style="font-size: 13px; color: var(--fg-muted)">{rest.length} artikelen</span>
+      </div>
+      <div class="posts-grid">
+        {rest.map(p => <PostCard post={p} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-header { padding: 80px 0 40px; text-align: center; }
+  .blog-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--orange-600); margin-bottom: 16px; }
+  .blog-kicker::before, .blog-kicker::after { content: ''; width: 24px; height: 1px; background: var(--orange); }
+  .blog-header h1 { font-size: clamp(48px, 7vw, 88px); letter-spacing: -0.02em; }
+  .blog-header h1 :global(em) { font-style: italic; color: var(--orange-600); }
+  .blog-header p { max-width: 560px; margin: 20px auto 0; color: var(--fg-muted); font-size: 17px; }
+
+  .cats { display: flex; justify-content: center; gap: 8px; padding: 24px 0 48px; flex-wrap: wrap; }
+  .cat { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-2); font-size: 13px; font-weight: 500; color: var(--fg-muted); }
+  .cat:hover { border-color: var(--navy); color: var(--fg); }
+  .cat.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  .featured { padding: 0 0 64px; }
+  .featured-card { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; align-items: center; box-shadow: var(--card-shadow); }
+  .featured-img { aspect-ratio: 4/3; border-radius: 16px; background-image: repeating-linear-gradient(135deg, color-mix(in oklab, var(--navy) 8%, var(--bg-3)) 0 14px, var(--bg-3) 14px 28px); border: 1px solid var(--border); }
+  .featured-tag { display: inline-block; background: var(--orange); color: var(--navy); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .featured h2 { font-size: clamp(32px, 3.6vw, 44px); }
+  .featured h2 a:hover { color: var(--orange-600); }
+  .featured-excerpt { margin-top: 16px; color: var(--fg-muted); font-size: 16px; line-height: 1.6; }
+  .post-meta { display: flex; align-items: center; gap: 14px; margin-top: 20px; font-size: 13px; color: var(--fg-muted); }
+  .author-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy-500)); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--fg-subtle); }
+
+  .posts-section { padding: 0 0 120px; }
+  .posts-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px; }
+  .posts-head h3 { font-size: 32px; }
+  .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 900px) {
+    .featured-card { grid-template-columns: 1fr; padding: 32px; }
+    .posts-grid { grid-template-columns: 1fr; }
+  }
+</style>
