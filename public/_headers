@@ -1,0 +1,12 @@
+# Security headers voor alle pagina's
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+# /admin heeft ruimere CSP nodig voor Sveltia CMS
+/admin/*
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; img-src * data: blob:; connect-src *; frame-src https://github.com https://auth.sveltia.app https://webwinkelcommunity.nl;
+  X-Frame-Options: SAMEORIGIN

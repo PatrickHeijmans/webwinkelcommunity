@@ -3,19 +3,12 @@ backend:
   repo: PatrickHeijmans/webwinkelcommunity
   branch: main
   base_url: https://auth.sveltia.app
-  # Alternatively, for direct GitHub OAuth (no Netlify):
-  # name: github
-  # repo: OWNER/REPO
-  # branch: main
 
-# Where uploaded images live
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
-# Allow editors to preview drafts before publishing
 publish_mode: editorial_workflow
 
-# Show site in new tab from CMS header
 site_url: https://webwinkelcommunity.nl
 display_url: https://webwinkelcommunity.nl
 logo_url: /favicon.svg
@@ -64,6 +57,31 @@ collections:
       - { label: "Artikel", name: "body", widget: "markdown" }
 
   # ─────────────────────────────────────────────
+  - name: "events"
+    label: "Events"
+    label_singular: "Event"
+    folder: "src/content/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} — {{date | date('DD-MM-YYYY')}}"
+    sortable_fields: ['date']
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["Masterclass", "Workshop", "Meetup", "Pod-call"]
+      - { label: "Datum & tijd", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", date_format: "DD-MM-YYYY", time_format: "HH:mm" }
+      - { label: "Eindtijd", name: "endTime", widget: "string", required: false, hint: "bv. '20:30'" }
+      - { label: "Locatie", name: "location", widget: "string", hint: "bv. 'Live op Skool' of 'De Oude Tol, Utrecht'" }
+      - { label: "Skool event URL", name: "skoolUrl", widget: "string", required: false, hint: "Link naar het event op Skool" }
+      - { label: "Skool event ID", name: "skoolId", widget: "string", required: false, hint: "Wordt automatisch ingevuld bij Skool-sync" }
+      - { label: "Uitgelicht", name: "featured", widget: "boolean", default: false }
+      - { label: "Beschrijving", name: "body", widget: "markdown", required: false }
+
+  # ─────────────────────────────────────────────
   - name: "experts"
     label: "Experts"
     label_singular: "Expert"
@@ -85,29 +103,6 @@ collections:
       - { label: "Volgorde", name: "order", widget: "number", required: false, default: 99, hint: "Lager = eerder" }
       - { label: "Actief", name: "active", widget: "boolean", default: true }
       - { label: "Bio", name: "body", widget: "markdown", required: false }
-
-  # ─────────────────────────────────────────────
-  - name: "events"
-    label: "Events"
-    label_singular: "Event"
-    folder: "src/content/events"
-    create: true
-    slug: "{{year}}-{{month}}-{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    summary: "{{title}} — {{date | date('DD-MM-YYYY')}}"
-    sortable_fields: ['date']
-    fields:
-      - { label: "Titel", name: "title", widget: "string" }
-      - label: "Type"
-        name: "type"
-        widget: "select"
-        options: ["Masterclass", "Workshop", "Meetup", "Pod-call"]
-      - { label: "Datum & tijd", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", date_format: "DD-MM-YYYY", time_format: "HH:mm" }
-      - { label: "Eindtijd", name: "endTime", widget: "string", required: false, hint: "bv. '20:30'" }
-      - { label: "Locatie", name: "location", widget: "string", hint: "bv. 'Live op Skool' of 'De Oude Tol, Utrecht'" }
-      - { label: "Uitgelicht", name: "featured", widget: "boolean", default: false }
-      - { label: "Beschrijving", name: "body", widget: "markdown", required: false }
 
   # ─────────────────────────────────────────────
   - name: "pricing"
